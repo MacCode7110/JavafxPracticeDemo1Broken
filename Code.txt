@@ -1,0 +1,74 @@
+package com.example.practicedemo1;
+
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+
+public class HelloApplication extends Application {
+    @Override
+    public void start(Stage stage) throws IOException {
+        //An FXML file is the styling file in JavaFX (similar to CSS)
+        //We need to store an FXML file as a resource into a new FXMLLoader object
+        //We need to create a Scene object (contents of the stage) and instantiate it with arguments:
+        //Loaded FXML file
+        //X and Y coordinates of the FXML content (in this case the Hello button)
+        //Set the title of the stage (title appears in top header) to Hello!
+        //Set the stage to contain the scene using the scene object instantiated earlier
+        //Show the stage, a window will appear with the contents of the stage (scene)
+
+        //When you click on the Hello! button in the scene, the message "Welcome to JavaFX!" appears
+        //This is because the hello-view.fxml file references code in HelloController.java that make the message appear.
+        //The welcomeText label is defined in HelloController and is referenced in the fxml line: <Label fx:id="welcomeText"/>
+        //onAction="#onHelloButtonClick calls onHelloButtonClick() in HelloController.java and sets the text for Label welcomeText, which is "Welcome to JavaFX!"
+
+        //Test 2 UI built using SceneBuilder
+
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Test2.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        stage.setTitle("Test2"); //Set the title of the stage
+        stage.setScene(scene); //Set the stage to contain the scene using the scene object above as an argument.
+/*
+        //Add an icon to the window, not the scene:
+        InputStream iconStream = getClass().getResourceAsStream("/Chimera.png");
+        //All images go directly under the resources folder or subfolders within the resources folder
+        Image image = new Image(iconStream);
+        stage.getIcons().add(image);
+    */
+
+
+        /*
+        //Overwrite the contents of the scene with a new secondScene and show the stage:
+        Label l1 = new Label("L1");
+        l1.setAlignment(Pos.BOTTOM_LEFT); //Set the position of the label to the bottom left
+        Scene secondScene = new Scene(l1);
+        stage.setScene(secondScene);
+        */
+
+        /*
+        //Overwrite the contents of the scene again using a new third scene that uses the EmployeeOperations:
+        FXMLLoader fxmlLoader2 = new FXMLLoader();
+        URL url = getClass().getResource("Test2.fxml"); //Get the URL for the corresponding xmfl file and store it.
+        fxmlLoader2.setLocation(url); //Have the fxmlloader set the location of the URL
+        Parent root = fxmlLoader2.load(); //Load the fxml file using the fxml loader variable
+        stage.setScene(new Scene(root)); //Have the stage set its scene using root as an argument, which contains the contents of the loaded fxml file
+        */
+        //NOTE: .fxml files need to be kept in com.example.practicedemo1 under the resources folder even though SW Academy says that you cna place fxml files under a View folder under src. I will consult a TA about this discrepancy.
+
+        stage.show(); //Show the stage (a window appears)
+    }
+
+    public static void main(String args[]) {
+        Application.launch(); //Launch the application, the start method overridden from the application class is implicitly called
+        //Adding args as an argument does not make a difference
+    }
+}
+
